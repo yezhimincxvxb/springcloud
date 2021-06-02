@@ -18,12 +18,20 @@
     <description>Demo project for Spring Boot</description>
 
     <modules>
+        <!-- 注册中心 -->
         <module>eureka-server</module>
         <module>eureka-server-hi</module>
+        <!-- ribbon 负载、路由转发、熔断-->
         <module>ribbon-ha</module>
         <module>ribbon-hi</module>
+        <!-- feign 负载、路由转发、熔断 -->
         <module>feign-ha</module>
         <module>feign-hi</module>
+        <!-- zuul 负载、路由转发、过滤器 -->
+        <module>zuul</module>
+        <!-- 配置中心 -->
+        <module>config-server</module>
+        <module>config-client</module>
     </modules>
 
     <properties>

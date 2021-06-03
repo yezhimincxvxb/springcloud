@@ -13,6 +13,10 @@ spring:
           searchPaths: config
           username:
           password:
+    bus:
+      enabled: true
+      trace:
+        enabled: true
 
 management:
   endpoints:

@@ -32,6 +32,14 @@
         <!-- 配置中心 -->
         <module>config-server</module>
         <module>config-client</module>
+        <!-- 服务追踪 -->
+        <module>zipkin-ha</module>
+        <module>zipkin-hi</module>
+        <!-- 服务监控 -->
+        <module>dashboard-ha</module>
+        <module>dashboard-hi</module>
+        <module>dashboard-turbine</module>
+        <!-- gateway -->
     </modules>
 
     <properties>

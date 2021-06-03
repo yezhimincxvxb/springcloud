@@ -1,0 +1,5 @@
+访问：http://localhost:8073/hystrix，打开面板界面
+输入：
+    http://localhost:8075/turbine.stream
+    2000
+    turbine

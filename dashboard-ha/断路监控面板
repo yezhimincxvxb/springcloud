@@ -1,0 +1,9 @@
+###
+请求下接口：http://localhost:8073/ha?name=hhhhh 8073端口去访问8074端口
+访问：http://localhost:8073/actuator/hystrix.stream
+会一直：ping...
+访问：http://localhost:8073/hystrix，打开面板界面
+输入：
+http://localhost:8073/actuator/hystrix.stream
+2000
+ha

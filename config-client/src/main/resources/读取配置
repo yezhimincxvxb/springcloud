@@ -5,4 +5,4 @@ spring.application.name必须对应git路径config目录下的文件名，不对
 ### 安装RabbitMq
 
 ### 刷新配置
-post请求访问：localhost:8098/actuator/refresh
+post请求访问：localhost:8098/actuator/bus-refresh

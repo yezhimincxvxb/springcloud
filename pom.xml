@@ -40,6 +40,12 @@
         <module>dashboard-hi</module>
         <module>dashboard-turbine</module>
         <!-- gateway -->
+        <module>gateway-ha</module>
+        <module>gateway-hi</module>
+        <module>gateway-route</module>
+        <module>gateway-filter</module>
+        <module>gateway-predicate</module>
+        <module>gateway-limit</module>
     </modules>
 
     <properties>

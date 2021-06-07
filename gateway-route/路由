@@ -1,0 +1,16 @@
+# 启动注册中心、gateway_ha、gateway_hi、gateway_route
+# gateway_route未配置 routes规则
+spring:
+  application:
+    name: gateway_route
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+默认路由规则
+http://localhost:8023/gateway-ha/ha?name=abc ==>  hi，abc ! 访问端口号：8022
+http://localhost:8023/gateway-hi/hi?name=abc ==>  ha，abc ! 访问端口号：8021
+
+### 自定义规则

@@ -1,0 +1,47 @@
+server:
+  port: 8026
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8088/eureka/
+
+spring:
+  application:
+    name: gateway-limit
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+        - id: to_gateway_hi
+          uri: lb://gateway-hi
+          predicates:
+            - Path=/hi/*
+          filters:
+            - StripPrefix=1
+            #熔断
+            - name: Hystrix
+              args:
+                name: fall
+                fallbackUri: forward:/fallback
+        - id: to_gateway_hi2
+          uri: lb://gateway-hi
+          predicates:
+            - Path=/hi/limit/*
+          filters:
+            - StripPrefix=2
+            #限流
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 1 #令牌桶每秒填充平均速率
+                redis-rate-limiter.burstCapacity: 10 #令牌桶容量
+
+  redis:
+    host: 192.168.145.11
+    port: 6380
+    password: 3Q3Q
+    database: 1

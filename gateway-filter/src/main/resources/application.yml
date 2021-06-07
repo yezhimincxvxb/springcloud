@@ -1,0 +1,27 @@
+server:
+  port: 8024
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8088/eureka/
+
+spring:
+  application:
+    name: gateway-filter
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      default-filters:
+        - ElapsedFilterFactory=false
+      routes:
+        - id: to_gateway_ha
+          uri: lb://gateway-ha
+          predicates:
+            - Path=/ha/*
+          filters:
+            #去除 Path=/ha/* 路径的第一个参数，即ha
+            - StripPrefix=1

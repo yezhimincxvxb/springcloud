@@ -1,0 +1,29 @@
+### 服务提供
+
+### 依赖
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+
+### 启动类
+@EnableEurekaClient
+表示客户端
+
+### application.yml
+server:
+  port: 8091
+
+spring:
+  application:
+    name: eureka-service-hi
+
+#向注册中心注册
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8088/eureka/

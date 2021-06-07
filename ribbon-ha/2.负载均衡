@@ -1,0 +1,22 @@
+### 负载均衡
+
+### 修改application.yml
+server:
+  port: 18092
+
+spring:
+  application:
+    name: ribbon-ha
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8088/eureka/
+
+### 启动端口18092的ribbon-ha
+启动的服务有：注册中心、ribbon-hi、ribbon-ha(8092)、ribbon-ha(18092)
+
+### 多次访问：http://localhost:8093/hi?name=123
+页面交替显示
+ha，123 ! 访问端口号：8092
+ha，123 ! 访问端口号：18092

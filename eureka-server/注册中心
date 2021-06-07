@@ -6,12 +6,9 @@
     <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 </dependency>
 
-### Application类
+### 启动类
 @EnableEurekaServer
-表明自己是服务端
-
-### 访问
-http://localhost:8088
+表示服务端
 
 ### application.yml
 spring:
@@ -31,6 +28,9 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+### 浏览器访问
+http://localhost:8088
 
 ### 注册中心集群
 spring:
@@ -88,3 +88,6 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://localhost:8088/eureka/,http://localhost:8089/eureka/
+
+### 依次访问
+http://localhost:8088、http://localhost:8089、http://localhost:8090

@@ -1,0 +1,51 @@
+### 路由转发
+
+### 依赖
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+spring-cloud-starter-netflix-eureka-client 中已包含 spring-cloud-starter-netflix-ribbon
+
+### 启动类
+@EnableEurekaClient
+表示客户端
+
+### application.yml
+server:
+  port: 8092
+
+spring:
+  application:
+    name: ribbon-ha
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8088/eureka/
+
+### 注入RestTemplate
+
+### 转发实现
+@Autowired
+private RestTemplate restTemplate;
+
+public String callHi(String name) {
+    return restTemplate.getForObject("http://ribbon-hi/hello?name=" + name, String.class);
+}
+
+### 启动服务
+注册中心、ribbon-ha、ribbon-hi
+访问：http://localhost:8092/ha?name=123
+转发：http://localhost:8093/hello?name=123
+响应：hi，123 ! 访问端口号：8093
+
+
+
+
+
+

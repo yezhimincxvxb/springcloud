@@ -6,11 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * 开启负载均衡
- */
 @Configuration
-@EnableHystrix
 public class RestTemplateConfig {
 
     @Bean

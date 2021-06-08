@@ -43,7 +43,7 @@ public String callHi(String name) {
 访问：http://localhost:8092/ha?name=123  ==> 转发：http://localhost:8093/hello?name=123
 响应：hi，123 ! 访问端口号：8093
 访问：http://localhost:8093/hi?name=123  ==> 转发：http://localhost:8092/hello?name=123
-响应：hi，123 ! 访问端口号：8092
+响应：ha，123 ! 访问端口号：8092
 
 
 

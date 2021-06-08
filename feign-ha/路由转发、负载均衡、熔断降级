@@ -1,0 +1,77 @@
+### 路由转发
+
+### 依赖
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+
+### 启动类
+@EnableFeignClients
+开启feign功能
+@EnableEurekaClient
+表示客户端
+
+### application.yml
+server:
+  port: 8094
+
+spring:
+  application:
+    name: feign-ha
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8088/eureka/
+#熔断降级
+feign:
+  hystrix:
+    enabled: true
+
+### 转发熔断实现
+接口HaFeign、实现类HaFeign
+@FeignClient(value = "服务名", fallback = HaBack.class)
+public interface HaFeign {
+    //转发接口
+    @GetMapping("hello")
+    String callHi(@RequestParam String name);
+}
+@Service
+public class HaBack implements HaFeign {
+    //服务挂了，回调方法
+    @Override
+    public String callHi(String name) {
+        return "feign-hi 服务挂了";
+    }
+}
+
+### 测试转发
+注册中心、feign-ha、feign-hi
+访问：http://localhost:8094/ha?name=123  ==> 转发：http://localhost:8095/hello?name=123
+响应：hi，123 ! 访问端口号：8095
+访问：http://localhost:8095/hi?name=123  ==> 转发：http://localhost:8094/hello?name=123
+响应：ha，123 ! 访问端口号：8094
+
+### 测试负载
+修改feign-ha的端口为18094并启动
+启动的服务有：注册中心、feign-hi、feign-ha(8094)、feign-ha(18094)
+访问：http://localhost:8095/hi?name=123
+页面交替显示
+ha，123 ! 访问端口号：8094
+ha，123 ! 访问端口号：18094
+
+### 测试熔断降级
+停止feign-ha(18094)
+访问：http://localhost:8095/hi?name=123
+显示：feign-ha 服务挂了
+过会再访问：http://localhost:8095/hi?name=123
+ha，123 ! 访问端口号：8094

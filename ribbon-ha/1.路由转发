@@ -40,10 +40,10 @@ public String callHi(String name) {
 
 ### 启动服务
 注册中心、ribbon-ha、ribbon-hi
-访问：http://localhost:8092/ha?name=123
-转发：http://localhost:8093/hello?name=123
+访问：http://localhost:8092/ha?name=123  ==> 转发：http://localhost:8093/hello?name=123
 响应：hi，123 ! 访问端口号：8093
-
+访问：http://localhost:8093/hi?name=123  ==> 转发：http://localhost:8092/hello?name=123
+响应：hi，123 ! 访问端口号：8092
 
 
 

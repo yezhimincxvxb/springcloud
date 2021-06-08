@@ -21,13 +21,13 @@
         <!-- 注册中心 -->
         <module>eureka-server</module>
         <module>eureka-server-hi</module>
-        <!-- ribbon 负载、路由转发、熔断-->
+        <!-- ribbon -->
         <module>ribbon-ha</module>
         <module>ribbon-hi</module>
-        <!-- feign 负载、路由转发、熔断 -->
+        <!-- feign -->
         <module>feign-ha</module>
         <module>feign-hi</module>
-        <!-- zuul 负载、路由转发、过滤器 -->
+        <!-- zuul  -->
         <module>zuul</module>
         <!-- 配置中心 -->
         <module>config-server</module>

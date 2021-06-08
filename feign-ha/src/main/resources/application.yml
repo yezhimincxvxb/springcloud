@@ -1,5 +1,5 @@
 server:
-  port: 8094
+  port: 18094
 
 spring:
   application:
@@ -13,5 +13,3 @@ eureka:
 feign:
   hystrix:
     enabled: true
-
-

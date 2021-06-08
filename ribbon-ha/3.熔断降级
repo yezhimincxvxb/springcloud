@@ -1,0 +1,37 @@
+### 熔断降级
+
+### 添加依赖
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+</dependency>
+
+### 启动类
+@EnableHystrix
+开启熔断降级功能
+
+### 服务挂掉，回调
+@HystrixCommand(fallbackMethod = "haError")
+public String callHi(String name) {
+    return restTemplate.getForObject("http://ribbon-hi/hello?name=" + name, String.class);
+}
+
+public String haError(String name) {
+    return "ha," + name + " , ribbon-hi 服务挂了!";
+}
+
+### 启动服务
+注册中心、ribbon-hi、ribbon-ha(8092)、ribbon-ha(18092)
+
+### 测试
+访问：http://localhost:8093/hi?name=123
+页面交替显示
+ha，123 ! 访问端口号：8092
+ha，123 ! 访问端口号：18092
+停止ribbon-ha(8092)服务
+再次访问：http://localhost:8093/hi?name=123
+页面交替显示
+ha，123 ! 访问端口号：18092
+hi,abc , ribbon-ha 服务挂了!
+过一会只剩
+ha，123 ! 访问端口号：18092

@@ -13,14 +13,12 @@ eureka:
 zuul:
   routes:
     api-a:
-      path: /api-a/**
       serviceId: ribbon-ha
+      path: /api-a/**
     api-b:
-      path: /api-b/**
       serviceId: ribbon-hi
-    api-c:
+      path: /api-b/**
+    feign-ha:
       path: /api-c/**
-      serviceId: feign-ha
-    api-d:
+    feign-hi:
       path: /api-d/**
-      serviceId: feign-hi
